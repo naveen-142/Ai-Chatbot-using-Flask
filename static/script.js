@@ -20,27 +20,26 @@ document.addEventListener('DOMContentLoaded', function () {
             chatBody.scrollTop = chatBody.scrollHeight;
 
             
-            fetch('http://127.0.0.1:5000/chat', {
+            fetch('https://ai-chatbot-using-flask-fy3r.vercel.app/', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json'
                 },
                 body: JSON.stringify({ message: userMessage })
             })
-                .then(response => response.json())
-                .then(data => {
-                    
-                    const botMessageElement = document.createElement('div');
-                    botMessageElement.className = 'chat-message bot';
-                    botMessageElement.textContent = data.response || 'No response from bot';
-                    chatBody.appendChild(botMessageElement);
-
-                    
-                    chatBody.scrollTop = chatBody.scrollHeight;
-                })
-                .catch(error => {
-                    console.error('Error:', error);
-                });
+            .then(response => response.json())
+            .then(data => {
+                const botMessageElement = document.createElement('div');
+                botMessageElement.className = 'chat-message bot';
+                botMessageElement.textContent = data.response || 'No response from bot';
+                chatBody.appendChild(botMessageElement);
+            
+                chatBody.scrollTop = chatBody.scrollHeight;
+            })
+            .catch(error => {
+                console.error('Error:', error);
+            });
+            
         }
     }
 });
