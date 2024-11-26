@@ -3,13 +3,3 @@ venv/
 
 # Ignore environment variables file
 .env
-
-# Ignore any IDE-specific files (e.g., VS Code)
-.idea/
-.vscode/
-
-# Ignore log files
-*.log
-
-# Ignore pyc files
-*.pyc
