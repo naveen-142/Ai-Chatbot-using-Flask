@@ -19,7 +19,7 @@ document.addEventListener('DOMContentLoaded', function () {
             chatBody.scrollTop = chatBody.scrollHeight;
 
             // Use dynamic URL
-            const apiUrl = `${window.location.origin}/api/chat`;
+            const apiUrl = `${window.location.origin}/chat`;
 
             fetch(apiUrl, {
                 method: 'POST',
