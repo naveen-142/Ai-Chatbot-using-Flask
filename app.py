@@ -7,15 +7,14 @@ import os
 load_dotenv()
 GOOGLE_API_KEY = os.getenv("GOOGLE_API_KEY")
 
+
 genai.configure(api_key=GOOGLE_API_KEY)
 
 model = genai.GenerativeModel('gemini-1.5-flash')
 chat = model.start_chat(history=[])
 
 app = Flask(__name__)
-
-# Allow requests from your frontend's Vercel domain
-CORS(app, origins=["https://ai-chatbot-using-flask-fy3r.vercel.app/"])
+CORS(app)  
 
 @app.route('/')
 def index():
@@ -29,6 +28,7 @@ def chat_response():
 
     try:
         response_raw = chat.send_message(user_input)
+        print(response_raw)
         response = response_raw.text
         return jsonify({"response": response})
 
@@ -37,4 +37,4 @@ def chat_response():
         return jsonify({"error": str(e)}), 500
 
 if __name__ == '__main__':
-    app.run(host='0.0.0.0', port=os.environ.get('PORT', 5000), debug=False)
+    app.run(debug=True)
