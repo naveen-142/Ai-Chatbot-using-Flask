@@ -1,4 +1,15 @@
+# Ignore virtual environment directory
+venv/
+
+# Ignore environment variables file
 .env
-requirements.txt
-vercel.json
-venv
+
+# Ignore any IDE-specific files (e.g., VS Code)
+.idea/
+.vscode/
+
+# Ignore log files
+*.log
+
+# Ignore pyc files
+*.pyc
