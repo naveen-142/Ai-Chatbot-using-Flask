@@ -4,6 +4,7 @@ from flask_cors import CORS
 import google.generativeai as genai
 from dotenv import load_dotenv
 import os
+from waitress import serve
 
 # Set up logging
 logging.basicConfig(level=logging.DEBUG)
@@ -43,5 +44,5 @@ def chat_response():
         app.logger.error(f"Error: {e}")
         return jsonify({"error": str(e)}), 500
 
-# if __name__ == '__main__':
-#     app.run(debug=True)
+if __name__ == "__main__":
+    serve(app, host='0.0.0.0', port=8000)
