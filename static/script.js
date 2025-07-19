@@ -5,6 +5,14 @@ document.addEventListener('DOMContentLoaded', function () {
 
     sendButton.addEventListener('click', sendMessage);
 
+    // 👇 Add this for Enter key support
+    messageInput.addEventListener('keydown', function (e) {
+        if (e.key === 'Enter') {
+            e.preventDefault();
+            sendMessage();
+        }
+    });
+
     function sendMessage() {
         const userMessage = messageInput.value.trim();
         if (userMessage) {
@@ -32,7 +40,7 @@ document.addEventListener('DOMContentLoaded', function () {
                 .then(data => {
                     const botMessageElement = document.createElement('div');
                     botMessageElement.className = 'chat-message bot';
-                    botMessageElement.textContent = data.response || 'No response from bot';
+                    botMessageElement.innerHTML = formatBotResponse(data.response || 'No response from bot');
                     chatBody.appendChild(botMessageElement);
                     chatBody.scrollTop = chatBody.scrollHeight;
                 })
@@ -44,5 +52,12 @@ document.addEventListener('DOMContentLoaded', function () {
                     chatBody.appendChild(errorElement);
                 });
         }
+    }
+
+    function formatBotResponse(response) {
+        response = response.replace(/\n/g, "<br>");
+        response = response.replace(/\* \*\*(.*?)\*\*/g, "<strong>$1</strong>");
+        response = response.replace(/\* (.*?)\n/g, "• $1<br>");
+        return response;
     }
 });
